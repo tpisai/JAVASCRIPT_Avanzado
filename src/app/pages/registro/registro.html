@@ -1,0 +1,56 @@
+@if (evento(); as e) { 
+  <h2 class="mb-1">Inscripción</h2> 
+  <p class="text-muted">{{ e.nombre | titlecase }} · {{ e.cupos | cupos }}</p> 
+  
+  @if (e.cupos === 0) { 
+    <div class="alert alert-danger">Este evento está agotado.</div> 
+    <a class="btn btn-dark" routerLink="/eventos">Ver otros eventos</a> 
+  } @else { 
+    <form [formGroup]="form" (ngSubmit)="enviar()" class="col-md-6" novalidate> 
+  
+      <div class="mb-3"> 
+        <label class="form-label" for="nombre">Nombre completo</label> 
+        <input id="nombre" class="form-control" formControlName="nombre" 
+               [class.is-invalid]="invalido('nombre')"> 
+        <div class="invalid-feedback">Ingresa al menos 3 caracteres.</div> 
+      </div> 
+  
+      <div class="mb-3"> 
+        <label class="form-label" for="correo">Correo</label> 
+        <input id="correo" type="email" class="form-control" formControlName="correo" 
+               [class.is-invalid]="invalido('correo')"> 
+        <div class="invalid-feedback"> 
+          @if (form.controls.correo.hasError('required')) { 
+            El correo es obligatorio. 
+          } @else { 
+            Escribe un correo válido. 
+          } 
+        </div> 
+      </div> 
+  
+      <div class="mb-3"> 
+        <label class="form-label" for="dni">DNI</label> 
+        <input id="dni" class="form-control" formControlName="dni" maxlength="8" 
+               [class.is-invalid]="invalido('dni')"> 
+        <div class="invalid-feedback">El DNI debe tener 8 dígitos.</div> 
+      </div> 
+  
+      <div class="mb-3"> 
+        <label class="form-label" for="carrera">Carrera</label> 
+        <select id="carrera" class="form-select" formControlName="carrera" 
+                [class.is-invalid]="invalido('carrera')"> 
+          <option value="">Selecciona...</option> 
+          <option>Ingeniería de Software</option> 
+          <option>Ingeniería de Sistemas e Informática</option> 
+          <option>Otra</option> 
+        </select> 
+        <div class="invalid-feedback">Selecciona tu carrera.</div> 
+      </div> 
+  
+      <button type="submit" class="btn btn-danger">Confirmar inscripción</button> 
+      <a class="btn btn-link" [routerLink]="['/eventos', e.id]">Cancelar</a> 
+    </form> 
+  } 
+} @else { 
+  <div class="alert alert-warning">El evento solicitado no existe.</div> 
+} 

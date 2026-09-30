@@ -1,0 +1,12 @@
+@if (datos.nombre) { 
+  <div class="alert alert-success"> 
+    <h4 class="alert-heading">¡Inscripción registrada!</h4> 
+    <p class="mb-0"> 
+      {{ datos.nombre | titlecase }}, te esperamos en 
+      <strong>{{ datos.evento | titlecase }}</strong>. 
+    </p> 
+  </div> 
+} @else { 
+  <div class="alert alert-secondary">No hay una inscripción reciente.</div> 
+} 
+<a class="btn btn-dark" routerLink="/eventos">Volver a eventos</a> 

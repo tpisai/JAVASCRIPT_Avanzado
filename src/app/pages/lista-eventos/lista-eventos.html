@@ -1,0 +1,15 @@
+<h2 class="mb-3">Próximos eventos</h2> 
+  
+@if (favoritos().length > 0) { 
+  <div class="alert alert-light border"> 
+    Tus favoritos: {{ favoritos().join(', ') }} 
+  </div> 
+} 
+  
+<div class="row g-3"> 
+  @for (e of eventos; track e.id) { 
+    <div class="col-md-4"> 
+      <app-evento-card [evento]="e" (favorito)="agregarFavorito($event)" /> 
+    </div> 
+  } 
+</div> 

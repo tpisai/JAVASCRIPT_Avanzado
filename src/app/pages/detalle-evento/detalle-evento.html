@@ -1,0 +1,14 @@
+@if (evento(); as e) { 
+  <h2>{{ e.nombre | titlecase }}</h2> 
+  <ul class="list-group mb-3"> 
+    <li class="list-group-item">Fecha: {{ e.fecha | date:'fullDate' }}</li> 
+    <li class="list-group-item">Lugar: {{ e.lugar }}</li> 
+    <li class="list-group-item">Precio: {{ e.precio | currency:'PEN' }}</li> 
+    <li class="list-group-item">Cupos: {{ e.cupos | cupos }}</li> 
+  </ul> 
+  <a class="btn btn-danger" [routerLink]="['/registro', e.id]">Inscribirme</a> 
+  <a class="btn btn-link" routerLink="/eventos">Volver</a> 
+} @else { 
+  <div class="alert alert-warning">El evento solicitado no existe.</div> 
+  <a class="btn btn-dark" routerLink="/eventos">Ver eventos</a> 
+} 

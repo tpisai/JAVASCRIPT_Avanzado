@@ -1,0 +1,19 @@
+<div class="card h-100 shadow-sm"> 
+    <div class="card-body"> 
+        <h5 class="card-title">{{ evento().nombre | titlecase }}</h5> 
+        <p class="card-text mb-1">Fecha: {{ evento().fecha | date:'EEEE d MMM, h:mm a' }}</p> 
+        <p class="card-text mb-1">Lugar: {{ evento().lugar }}</p> 
+        <p class="card-text mb-1">Precio: {{ evento().precio | currency:'PEN' }}</p> 
+        <span class="badge" 
+                [class.text-bg-danger]="evento().cupos === 0" 
+                [class.text-bg-success]="evento().cupos > 0"> 
+            {{ evento().cupos | cupos }} 
+        </span> 
+    </div> 
+  <div class="card-footer bg-white d-flex gap-2"> 
+    <a class="btn btn-outline-dark btn-sm" 
+       [routerLink]="['/eventos', evento().id]">Ver detalle</a> 
+    <button class="btn btn-outline-danger btn-sm" 
+            (click)="marcarFavorito()">♥ Favorito</button> 
+  </div> 
+</div> 
